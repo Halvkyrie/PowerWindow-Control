@@ -1,14 +1,14 @@
 -- PowerWindow-Control by Halvkyrie
--- TODO: Github link
--- Don't steal
+-- Source: https://github.com/Halvkyrie/PowerWindow-Control
+-- Don't steal thanks
 
-SCRIPT_VERSION = "0.1"
 
 -- Requirements --
 util.require_natives(1651208000)
 
 -- Meta info things -- 
 SCRIPT_NAME = "PowerWindow-Control"
+SCRIPT_VERSION = "0.2"
 
 -- end Meta info things -- 
 
@@ -17,6 +17,8 @@ SCRIPT_NAME = "PowerWindow-Control"
 SCRIPT_META_LIST = menu.list(menu.my_root(), "About this Script")
 menu.divider(SCRIPT_META_LIST, SCRIPT_NAME .. " Version " .. SCRIPT_VERSION)
 menu.divider(SCRIPT_META_LIST, "By Halvkyrie")
+menu.hyperlink(SCRIPT_META_LIST, "Source Code on GitHub", "https://github.com/Halvkyrie/PowerWindow-Control", "View the source code on GitHub")
+menu.hyperlink(SCRIPT_META_LIST, "My Page", "https://halvkyrie.github.io/", "Don't click it if you hate comic sans")
 
 
 local currentVehicle = entities.get_user_vehicle_as_handle()
@@ -37,6 +39,16 @@ drawScriptMenu = function()
 menu.action(menu.my_root(), "Roll all down", {"pwcalldown"}, "Rolls all windows of the current vehicle down", function()
     VEHICLE.ROLL_DOWN_WINDOWS(currentVehicle)
 end)
+
+menu.action(menu.my_root(), "Roll down front windows", {"pwcfrontdown"}, "Rolls the front left/front right windows down. Probably the most relevant", function()
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 0)
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 1)
+end)
+
+menu.action(menu.my_root(), "Roll down rear windows", {"pwcreardown"}, "Rolls the rear left/rear right windows down", function()
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 2)
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 3)
+)
 
 menu.action(menu.my_root(), "Roll all up", {"pwcallup"}, "Rolls all windows of the current vehicle up", function()
     for k, v in pairs(windows) do
