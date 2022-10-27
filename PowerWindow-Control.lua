@@ -36,39 +36,37 @@ local windows = {
 
 drawScriptMenu = function()
     menu.divider(menu.my_root(), "Vehicle Window Options")
-menu.action(menu.my_root(), "Roll all down", {"pwcalldown"}, "Rolls all windows of the current vehicle down", function()
-    VEHICLE.ROLL_DOWN_WINDOWS(currentVehicle)
-end)
-
-menu.action(menu.my_root(), "Roll down front windows", {"pwcfrontdown"}, "Rolls the front left/front right windows down. Probably the most relevant", function()
-    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 0)
-    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 1)
-end)
-
-menu.action(menu.my_root(), "Roll down rear windows", {"pwcreardown"}, "Rolls the rear left/rear right windows down", function()
-    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 2)
-    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 3)
-)
-
-menu.action(menu.my_root(), "Roll all up", {"pwcallup"}, "Rolls all windows of the current vehicle up", function()
-    for k, v in pairs(windows) do
-        VEHICLE.ROLL_UP_WINDOW(currentVehicle, v.number)
-    end
-end)
-
+    
 ROLL_DOWN_INDIVIDUAL = menu.list(menu.my_root(), "Roll down individual windows")
     for k, v in pairs(windows) do
         menu.action(ROLL_DOWN_INDIVIDUAL, "Roll down " .. v.name .. " window", {}, "Rolls down " .. v.name .. " window", function()
         VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, v.number)
         end)
     end
-
 ROLL_UP_INDIVIDUAL = menu.list(menu.my_root(), "Roll up individual windows")
     for k, v in pairs(windows) do
         menu.action(ROLL_UP_INDIVIDUAL, "Roll up " .. v.name .. " window", {}, "Rolls up " .. v.name .. " window", function()
         VEHICLE.ROLL_UP_WINDOW(currentVehicle, v.number)
         end)
     end
+
+menu.action(menu.my_root(), "Roll all down", {"pwcalldown"}, "Rolls all windows of the current vehicle down", function()
+    VEHICLE.ROLL_DOWN_WINDOWS(currentVehicle)
+end)
+menu.action(menu.my_root(), "Roll all up", {"pwcallup"}, "Rolls all windows of the current vehicle up", function()
+    for k, v in pairs(windows) do
+        VEHICLE.ROLL_UP_WINDOW(currentVehicle, v.number)
+    end
+end)
+
+menu.action(menu.my_root(), "Roll down front windows", {"pwcfrontdown"}, "Rolls the front left/front right windows down. Probably the most relevant", function()
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 0)
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 1)
+end)
+menu.action(menu.my_root(), "Roll down rear windows", {"pwcreardown"}, "Rolls the rear left/rear right windows down", function()
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 2)
+    VEHICLE.ROLL_DOWN_WINDOW(currentVehicle, 3)
+end)
 
 end
 
